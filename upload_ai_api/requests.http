@@ -1,0 +1,2 @@
+# @name Hello_Sam
+GET http://localhost:3333/
