@@ -15,6 +15,6 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "cSpell.language": "en,pt-BR",
-  "cSpell.words": ["fastify"],
+  "cSpell.words": ["fastify", "openai"],
   "conventionalCommits.scopes": ["backend_api"]
 }
