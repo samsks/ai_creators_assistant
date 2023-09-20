@@ -2,10 +2,12 @@ import { FastifyInstance } from "fastify";
 import fastifyMultipart from "@fastify/multipart";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import fs from "node:fs";
+import fs, { createReadStream } from "node:fs";
 import { pipeline } from "node:stream";
 import { promisify } from "node:util";
 import { prisma } from "../lib/prisma";
+import { z } from "zod";
+import { openai } from "../lib/openai";
 
 const pump = promisify(pipeline);
 
@@ -48,5 +50,44 @@ export async function videoRoutes(app: FastifyInstance) {
     });
 
     return reply.status(201).send(videoData);
+  });
+
+  app.post("/:videoId/transcript", async (request, reply) => {
+    const paramsSchema = z.object({
+      videoId: z.string().uuid(),
+    });
+    const { videoId } = paramsSchema.parse(request.params);
+
+    const bodySchema = z.object({
+      prompt: z.string(),
+    });
+    const { prompt } = bodySchema.parse(request.body);
+
+    const video = await prisma.video.findUniqueOrThrow({
+      where: { id: videoId },
+    });
+
+    const videoPath = video.path;
+    const audioReadStream = createReadStream(videoPath);
+
+    const response = await openai.audio.transcriptions.create({
+      file: audioReadStream,
+      model: "whisper-1",
+      language: "pt",
+      response_format: "json",
+      temperature: 0,
+      prompt,
+    });
+
+    const transcription = response.text;
+
+    await prisma.video.update({
+      where: { id: videoId },
+      data: {
+        transcription,
+      },
+    });
+
+    return { transcription };
   });
 }
