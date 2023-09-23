@@ -6,14 +6,15 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
   "files.autoSave": "onFocusChange",
   "files.autoSaveDelay": 1000,
   "[prisma]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "Prisma.prisma"
   },
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
+
   "cSpell.language": "en,pt-BR",
   "cSpell.words": ["fastify", "openai"],
   "conventionalCommits.scopes": ["backend_api"]
