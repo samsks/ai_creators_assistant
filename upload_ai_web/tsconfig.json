@@ -27,5 +27,14 @@
     }
   },
   "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "scripts",
+    "tests",
+    "src/ffmpeg"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
