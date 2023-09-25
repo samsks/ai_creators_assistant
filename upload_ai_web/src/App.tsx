@@ -47,10 +47,14 @@ export function App() {
             Desenvolvido com 💜 no NLW da Rocketseat
           </span>
           <Separator orientation="vertical" className="h-6" />
-          <Button variant="outline">
+          <a
+            href="https://github.com/samsks/ai_creators_assistant"
+            target="_blank"
+            className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-1 focus:ring-ring focus:ring-opacity-50 disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
+          >
             <Github className="w-4 h-4 mr-2" />
             Github
-          </Button>
+          </a>
         </div>
       </div>
       <main className="flex-1 p-6 flex gap-6">
