@@ -14,14 +14,19 @@ import { Slider } from "./components/ui/slider";
 import { VideoInputForm } from "./components/videoInputForm";
 import { PromptSelect } from "./components/promptSelect";
 import { useState } from "react";
+import { useCompletion } from "ai/react";
 
 export function App() {
   const [temperature, setTemperature] = useState(0.5);
   const [videoId, setVideoId] = useState<string | null>(null);
 
-  function handlePromptSelected(template: string) {
-    console.log(template);
-  }
+  const { input, setInput, handleInputChange } = useCompletion({
+    api: "http://localhost:3333/ai/complete",
+    body: {
+      videoId,
+      temperature,
+    },
+  });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -44,6 +49,8 @@ export function App() {
             <Textarea
               className="resize-none p-4 leading-relaxed"
               placeholder="Inclua o prompt para a IA..."
+              value={input}
+              onChange={handleInputChange}
             />
             <Textarea
               className="resize-none p-4 leading-relaxed"
@@ -64,7 +71,7 @@ export function App() {
           <form className="space-y-6">
             <div className="space-y-2">
               <Label>Prompt</Label>
-              <PromptSelect onPromptSelected={handlePromptSelected} />
+              <PromptSelect onPromptSelected={setInput} />
             </div>
             <div className="space-y-2">
               <Label>Modelo</Label>
