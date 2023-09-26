@@ -34,6 +34,8 @@ A API possui os seguintes endpoints:
 - `/videos`: Endpoint para manipulação de vídeos.
 - `/ai`: Endpoint para interação com a API da OpenAI.
 
+[Documentação das Rotas](https://documenter.getpostman.com/view/24394526/2s9YJXaQoe)
+
 ## Contribuição
 
 Contribuições são sempre bem-vindas. Se você encontrar algum problema ou tiver uma sugestão, sinta-se à vontade para abrir uma issue ou um pull request.
